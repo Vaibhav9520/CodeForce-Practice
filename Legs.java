@@ -14,4 +14,5 @@ public class Legs {
             System.out.println(result);
         }  
      }
+     
 }
