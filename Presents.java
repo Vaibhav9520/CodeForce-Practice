@@ -12,8 +12,11 @@ public class Presents {
 
         int[] reciver = new int[n];
         for(int i=0;i<n;i++){
-            
+            reciver[giver[i]-1] = i+1;
+        }
 
+        for(int i=0;i<n;i++){
+            System.out.print(reciver[i]+" ");
         }
     }
 }

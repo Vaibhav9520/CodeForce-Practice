@@ -11,6 +11,7 @@ public class Domino_poling {
         int domino_Size = 2;
 
         int result = total_size / domino_Size;
+        
         System.out.println(result);
     }
 }
