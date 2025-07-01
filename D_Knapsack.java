@@ -1,28 +1,41 @@
 import java.util.*;
 
 public class D_Knapsack {
-    public static int knapsack(int[] value,int[] weight,int n,int w,int curr,int[] dp){
-        if(n==0||w<=0) return 0;
-        
+    static long[][] dp;
 
-        return 1;
+    public static long knapsack(long[] value, long[] weight, int n, int w) {
+        if (n == 0 || w == 0) return 0;
+        if (dp[n][w] != -1) return dp[n][w];
+
+        if (weight[n - 1] > w) {
+            dp[n][w] = knapsack(value, weight, n - 1, w);
+        } else {
+            long pick = value[n - 1] + knapsack(value, weight, n - 1, w - (int)weight[n - 1]);
+            long notPick = knapsack(value, weight, n - 1, w);
+            dp[n][w] = Math.max(pick, notPick);
+        }
+
+        return dp[n][w];
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int w = sc.nextInt();
 
-        int[] value = new int[n];
-        int[] weight = new int[n];
-        for(int i=0;i<n;i++){
-            value[i] = sc.nextInt();
-            weight[i] = sc.nextInt();
+        long[] weight = new long[n];
+        long[] value = new long[n];
+
+        for (int i = 0; i < n; i++) {
+            weight[i] = sc.nextLong();
+            value[i] = sc.nextLong();
         }
 
-        int[] dp = new int[n+1];
-        Arrays.fill(dp,-1);
-        int result = 0;
+        dp = new long[n + 1][w + 1];
+        for (int i = 0; i <= n; i++) {
+            Arrays.fill(dp[i], -1);
+        }
 
-        System.out.println(knapsack(value,weight,n,w,0,dp));
+        System.out.println(knapsack(value, weight, n, w));
     }
 }
